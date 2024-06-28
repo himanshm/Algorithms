@@ -17,3 +17,34 @@ function anagrams(strA: string, strB: string): boolean {
 }
 
 console.log(anagrams('rail safety', 'fairy tales'));
+
+function areAnagrams(strA: string, strB: string): boolean {
+  // Remove whitesapces and convert strings to lowercase
+  const normalizedStrA = strA.replace(/\s/g, '').toLowerCase();
+  const normalizedStrB = strB.replace(/\s/g, '').toLowerCase();
+
+  if (normalizedStrA.length !== normalizedStrB.length) {
+    return false;
+  }
+
+  // Create a frequency map for each string
+  const charMapA: { [key: string]: number } = {};
+  const charMapB: { [key: string]: number } = {};
+
+  for (const char of normalizedStrA) {
+    charMapA[char] = (charMapA[char] || 0) + 1;
+  }
+
+  for (const char of normalizedStrB) {
+    charMapB[char] = (charMapB[char] || 0) + 1;
+  }
+
+  // Compare chars in frequency map
+  for (const char in charMapA) {
+    if (charMapA[char] !== charMapB[char]) {
+      return false;
+    }
+  }
+
+  return true;
+}
