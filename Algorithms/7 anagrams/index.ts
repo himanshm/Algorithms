@@ -18,6 +18,16 @@ function anagrams(strA: string, strB: string): boolean {
 
 console.log(anagrams('rail safety', 'fairy tales'));
 
+function buildCharMap(str: string): { [key: string]: number } {
+  const charMap: { [key: string]: number } = {};
+
+  for (const char of str) {
+    charMap[char] = (charMap[char] || 0) + 1;
+  }
+
+  return charMap;
+}
+
 function areAnagrams(strA: string, strB: string): boolean {
   // Remove whitesapces and convert strings to lowercase
   const normalizedStrA = strA.replace(/\s/g, '').toLowerCase();
