@@ -1,6 +1,7 @@
 import pluginJs from '@eslint/js';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import prettier from 'eslint-plugin-prettier';
 import globals from 'globals';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -23,7 +24,8 @@ export default [
       },
     },
     plugins: {
-      '@typescript-eslint': tseslint,
+      '@typescript-eslint': tseslint, // Use the TypeScript plugin
+      prettier, // Prettier as an object
     },
     rules: {
       'max-len': 'off',
@@ -39,6 +41,7 @@ export default [
       '@typescript-eslint/ban-types': 'off',
       'func-names': ['error', 'never'],
       'arrow-parens': [2, 'as-needed'],
+      'arrow-body-style': ['error', 'as-needed'],
       'no-underscore-dangle': [
         'error',
         {
@@ -53,6 +56,7 @@ export default [
           maxBOF: 0, // No blank lines at the beginning of the file
         },
       ],
+      'prettier/prettier': ['error'],
     },
   },
   {
