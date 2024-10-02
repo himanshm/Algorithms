@@ -12,7 +12,7 @@
 //   4
 //   buzz
 
-function fizzBuzz(n: number): void {
+const fizzBuzz = (n: number): void => {
   const result: string[] = [];
   let num = 1;
   while (num <= n) {
@@ -28,10 +28,43 @@ function fizzBuzz(n: number): void {
     num++;
   }
   console.log(result.join(', '));
-}
+};
 
-console.log(fizzBuzz(100));
+fizzBuzz(100);
 
-// In JavaScript and TypeScript, the const keyword means that the variable cannot be reassigned to a different value. However, it does not mean that the value itself is immutable. For arrays and objects, const ensures that the reference to the array or object remains constant, but the contents of the array or object can still be modified.
+const fizzBuzzOptimized = (n: number): void => {
+  const result = Array.from({ length: n }, (_, i) => {
+    const num = i + 1;
+    if (num % 15 === 0) return 'fizzBuzz';
+    if (num % 3 === 0) return 'fizz';
+    if (num % 5 === 0) return 'buzz';
+    return num.toString();
+  });
 
-// When we declare result as const in the fizzBuzz function, we ensure that result always points to the same array, but we can still use methods like push to modify the contents of the array.
+  console.log(result.join(', '));
+};
+fizzBuzzOptimized(100);
+
+const fizzBuzzV1 = (n: number): void => {
+  const numbers = Array.from({ length: n }, (_, i) => i + 1);
+
+  for (const num of numbers) {
+    const result = `${num % 3 === 0 ? 'Fizz' : ''}${
+      num % 5 === 0 ? 'Buzz' : ''
+    }`;
+    console.log(result || num);
+  }
+};
+
+fizzBuzzV1(100);
+
+const fizzBuzzV2 = (n: number): void => {
+  Array.from({ length: n }, (_, i) => i + 1).forEach(num => {
+    const result = `${num % 3 === 0 ? 'Fizz' : ''}${
+      num % 5 === 0 ? 'Buzz' : ''
+    }`;
+    console.log(result || num);
+  });
+};
+
+fizzBuzzV2(100);
