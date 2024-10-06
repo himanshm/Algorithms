@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // --- Directions
 // Write a program that generates a random password
 // containing letters, numbers, and symbols based on
@@ -29,52 +26,27 @@ const rl = readline.createInterface({
 
 // Function to generate randomCharacters
 const generateRandomCharacters = (count: number, charSet: string[]): string[] =>
-  Array.from(
-    { length: count },
-    () => charSet[Math.floor(Math.random() * charSet.length)]
-  );
+  Array.from({ length: count }, () => charSet[Math.floor(Math.random() * charSet.length)]);
 
 // Function to Shuffle Array
 const shuffleArray = <T>(array: T[]): T[] =>
   array.reduceRight((shuffled, current) => {
     const randomIndex = Math.floor(Math.random() * (shuffled.length + 1));
-    return [
-      ...shuffled.slice(0, randomIndex),
-      current,
-      ...shuffled.slice(randomIndex),
-    ];
+    return [...shuffled.slice(0, randomIndex), current, ...shuffled.slice(randomIndex)];
   }, [] as T[]);
 
 // Function to generate password
-const passwordGenerator = (
-  lettersCount: number,
-  symbolsCount: number,
-  numbersCount: number
-): string => {
-  const letters: string[] =
-    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const passwordGenerator = (lettersCount: number, symbolsCount: number, numbersCount: number): string => {
+  const letters: string[] = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   const symbols: string[] = '!#$%&()*+'.split('');
   const numbers: string[] = '0123456789'.split('');
 
   // Generate random characters for each type
-  const passwordLetters: string[] = generateRandomCharacters(
-    lettersCount,
-    letters
-  );
-  const passwordSymbols: string[] = generateRandomCharacters(
-    symbolsCount,
-    symbols
-  );
-  const passwordNumbers: string[] = generateRandomCharacters(
-    numbersCount,
-    numbers
-  );
+  const passwordLetters: string[] = generateRandomCharacters(lettersCount, letters);
+  const passwordSymbols: string[] = generateRandomCharacters(symbolsCount, symbols);
+  const passwordNumbers: string[] = generateRandomCharacters(numbersCount, numbers);
 
-  const passwordList: string[] = [
-    ...passwordLetters,
-    ...passwordNumbers,
-    ...passwordSymbols,
-  ];
+  const passwordList: string[] = [...passwordLetters, ...passwordNumbers, ...passwordSymbols];
   console.log('passwordList', passwordList);
   const shuffledPasswordList = shuffleArray(passwordList);
   console.log('shuffledPasswordList', shuffledPasswordList);
@@ -83,27 +55,20 @@ const passwordGenerator = (
 };
 
 // Ask for the user input
-rl.question(
-  'How many letters would you like in your password?\n',
-  (nrLetters: string) => {
-    rl.question('How many symbols would you like?\n', (nrSymbols: string) => {
-      rl.question('How many numbers would you like?\n', (nrNumbers: string) => {
-        const lettersCount: number = parseInt(nrLetters);
-        const symbolsCount: number = parseInt(nrSymbols);
-        const numbersCount: number = parseInt(nrNumbers);
+rl.question('How many letters would you like in your password?\n', (nrLetters: string) => {
+  rl.question('How many symbols would you like?\n', (nrSymbols: string) => {
+    rl.question('How many numbers would you like?\n', (nrNumbers: string) => {
+      const lettersCount: number = parseInt(nrLetters);
+      const symbolsCount: number = parseInt(nrSymbols);
+      const numbersCount: number = parseInt(nrNumbers);
 
-        // Generate the password using the user input
-        const password = passwordGenerator(
-          lettersCount,
-          symbolsCount,
-          numbersCount
-        );
+      // Generate the password using the user input
+      const password = passwordGenerator(lettersCount, symbolsCount, numbersCount);
 
-        console.log('Your generated Password is: ', password);
+      console.log('Your generated Password is: ', password);
 
-        // Close the readline interface
-        rl.close();
-      });
+      // Close the readline interface
+      rl.close();
     });
-  }
-);
+  });
+});
