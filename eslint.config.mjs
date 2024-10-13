@@ -56,7 +56,7 @@ export default [
           maxBOF: 0, // No blank lines at the beginning of the file
         },
       ],
-      'prettier/prettier': ['error'],
+      'prettier/prettier': ['error', { arrowParens: 'avoid' }],
     },
   },
   {
