@@ -31,4 +31,11 @@ function capitalizeTwo(str: string): string {
   return result;
 }
 
-console.log(capitalizeTwo('a short sentence'));
+const titleCase = (str: string): string =>
+  str
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+
+console.log(titleCase('a short sentence'));
